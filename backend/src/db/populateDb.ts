@@ -9,7 +9,7 @@ import {
 import movies from "./mocks/movies.json";
 import products from "./mocks/tools.json";
 import programmingLanguages from "./mocks/programmingLanguages.json";
-import { Collection } from ".";
+import { Collection } from "./database.service";
 
 const { mongoUsername, mongoPassword, mongoDbName } = config;
 
