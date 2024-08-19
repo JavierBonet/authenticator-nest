@@ -5,6 +5,7 @@ import {
   Product,
   ProgrammingLanguage,
 } from "../../../common/interfaces";
+import { Injectable } from "@nestjs/common";
 
 interface User {
   _id: ObjectId;
@@ -27,11 +28,8 @@ export enum Collection {
 
 let client: MongoClient;
 
-class DB {
-  private static instance: DB;
-
-  private constructor() {}
-
+@Injectable()
+class DatabaseService {
   private getClient() {
     if (!client) {
       client = new MongoClient(uri, {
@@ -44,18 +42,6 @@ class DB {
     }
 
     return client;
-  }
-
-  static getInstance() {
-    if (!this.instance) {
-      this.instance = new DB();
-    }
-
-    return this.instance;
-  }
-
-  async connect() {
-    await this.getClient().connect();
   }
 
   async createDocument(collectionName: string, document: OptionalId<User>) {
@@ -105,4 +91,4 @@ class DB {
   }
 }
 
-export default DB;
+export default DatabaseService;
