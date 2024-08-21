@@ -1,38 +1,14 @@
-import { MongoClient, ObjectId, OptionalId, ServerApiVersion } from "mongodb";
-import { config } from "../config";
-import {
-  Movie,
-  Product,
-  ProgrammingLanguage,
-} from "../../../common/interfaces";
 import { Injectable } from "@nestjs/common";
-
-interface User {
-  _id: ObjectId;
-  fullName: string;
-  email: string;
-  password: string;
-  role: string;
-}
-
-const { mongoUsername, mongoPassword, mongoDbName } = config;
-
-const uri = `mongodb+srv://${mongoUsername}:${mongoPassword}@appcluster.cyc4aqt.mongodb.net/?retryWrites=true&w=majority&appName=AppCluster`;
-
-export enum Collection {
-  User = "users",
-  Movie = "movies",
-  Product = "products",
-  ProgrammingLanguage = "programming-languages",
-}
+import { MongoClient, ServerApiVersion } from "mongodb";
+import { mongoUri } from "../constants/database";
 
 let client: MongoClient;
 
 @Injectable()
 class DatabaseService {
-  private getClient() {
+  getClient() {
     if (!client) {
-      client = new MongoClient(uri, {
+      client = new MongoClient(mongoUri, {
         serverApi: {
           version: ServerApiVersion.v1,
           strict: true,
@@ -42,48 +18,6 @@ class DatabaseService {
     }
 
     return client;
-  }
-
-  async createDocument(collectionName: string, document: OptionalId<User>) {
-    const collection = this.getClient()
-      .db(mongoDbName)
-      .collection(collectionName);
-
-    return await collection.insertOne(document);
-  }
-
-  async getUserByEmail(email: string) {
-    const collection = this.getClient()
-      .db(mongoDbName)
-      .collection(Collection.User);
-
-    return collection.findOne<User>({ email }).then((user) => {
-      return user ? user : undefined;
-    });
-  }
-
-  async getMovies(): Promise<Movie[]> {
-    return this.getClient()
-      .db(mongoDbName)
-      .collection(Collection.Movie)
-      .find<Movie>({})
-      .toArray();
-  }
-
-  async getProducts(): Promise<Product[]> {
-    return this.getClient()
-      .db(mongoDbName)
-      .collection(Collection.Product)
-      .find<Product>({})
-      .toArray();
-  }
-
-  async getProgrammingLanguages(): Promise<ProgrammingLanguage[]> {
-    return this.getClient()
-      .db(mongoDbName)
-      .collection(Collection.ProgrammingLanguage)
-      .find<ProgrammingLanguage>({})
-      .toArray();
   }
 
   async close() {

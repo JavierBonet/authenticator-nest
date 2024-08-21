@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
-import DatabaseService, { Collection } from "../db/database.service";
 import { HttpStatus } from "../constants/httpStatus";
 import {
   accessTokenNotExpired,
@@ -9,50 +8,58 @@ import {
   getAccessToken,
   getRefreshToken,
 } from "./tokenHelper";
-import { SignInRequest, SignUpRequest } from "../types/interfaces";
+import { SignInRequest, SignUpRequest } from "../types";
 import { Injectable } from "@nestjs/common";
+import { Collection } from "../constants/database";
+import AuthenticationRepository from "./authentication.repository";
 
 const SALT_ROUNDS = 10;
 
 @Injectable()
 class AuthenticationHelper {
-  constructor(private readonly db: DatabaseService) {}
+  constructor(
+    private readonly authenticationRepository: AuthenticationRepository
+  ) {}
 
   async signUp(req: SignUpRequest, res: Response) {
     const { fullName, email, role, password } = req.body;
 
     const salt = bcrypt.genSaltSync(SALT_ROUNDS);
 
-    return this.db.getUserByEmail(email).then((dbUser) => {
-      if (dbUser) {
-        const message = "User already exists";
-        res.status(HttpStatus.BAD_REQUEST).send({ message });
-        return;
-      }
+    return this.authenticationRepository
+      .getUserByEmail(email)
+      .then((dbUser) => {
+        if (dbUser) {
+          const message = "User already exists";
+          res.status(HttpStatus.BAD_REQUEST).send({ message });
+          return;
+        }
 
-      const user = {
-        fullName,
-        email,
-        role,
-        password: bcrypt.hashSync(password, salt),
-      };
+        const user = {
+          fullName,
+          email,
+          role,
+          password: bcrypt.hashSync(password, salt),
+        };
 
-      return this.db
-        .createDocument(Collection.User, user)
-        .then(() => {
-          const successMessage = "Registration successfully";
-          res.status(HttpStatus.OK).send({ message: successMessage });
-        })
-        .catch((error) => {
-          res.status(HttpStatus.INTERNAL_SERVER_ERROR).send({ message: error });
-        });
-    });
+        return this.authenticationRepository
+          .createDocument(Collection.User, user)
+          .then(() => {
+            const successMessage = "Registration successfully";
+            res.status(HttpStatus.OK).send({ message: successMessage });
+          })
+          .catch((error) => {
+            res
+              .status(HttpStatus.INTERNAL_SERVER_ERROR)
+              .send({ message: error });
+          });
+      });
   }
 
   async signIn(req: SignInRequest, res: Response) {
     const { email, password } = req.body;
 
-    this.db
+    this.authenticationRepository
       .getUserByEmail(email)
       .then((user) => {
         let message;

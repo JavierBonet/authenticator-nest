@@ -1,14 +1,14 @@
 import { Controller, Get, HttpStatus, Res } from "@nestjs/common";
-import DatabaseService from "../../db/database.service";
 import { Response } from "express";
+import ProductsRepository from "./products.repository";
 
 @Controller()
 class ProductsController {
-  constructor(private readonly db: DatabaseService) {}
+  constructor(private readonly productsRepository: ProductsRepository) {}
 
   @Get()
   async getProducts(@Res() res: Response) {
-    const products = await this.db.getProducts();
+    const products = await this.productsRepository.getAll();
 
     res.status(HttpStatus.OK).send({ products });
   }
