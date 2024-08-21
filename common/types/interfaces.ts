@@ -1,4 +1,4 @@
-import { ObjectId } from "mongodb";
+import type { ObjectId } from "../../backend/node_modules/mongodb";
 import { JwtPayload } from "jsonwebtoken";
 
 export interface Movie {
@@ -62,7 +62,7 @@ export interface ProgrammingLanguage {
   usage: string[];
 }
 
-declare module JWT {
+export declare module JWT {
   export interface Payload extends JwtPayload {
     email: string;
     role: string;

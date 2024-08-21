@@ -1,3 +1,5 @@
+import { Request } from "express";
+
 export type SignUpRequest = Request<
   any,
   any,

@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Req, Res } from "@nestjs/common";
 import { Request, Response } from "express";
 import { HttpStatus } from "../../constants/httpStatus";
-import type { SignInRequest, SignUpRequest } from "../../types/interfaces";
+import type { SignInRequest, SignUpRequest } from "../../types";
 import AuthenticationHelper from "../../helpers/authenticationHelper";
 
 @Controller()

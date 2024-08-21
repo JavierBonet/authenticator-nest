@@ -1,15 +1,11 @@
 import { MongoClient, OptionalId, ServerApiVersion } from "mongodb";
 import "dotenv/config";
 import { config } from "../config";
-import {
-  Product,
-  Movie,
-  ProgrammingLanguage,
-} from "../../../common/interfaces";
+import { Product, Movie, ProgrammingLanguage } from "../../../common/types";
 import movies from "./mocks/movies.json";
 import products from "./mocks/tools.json";
 import programmingLanguages from "./mocks/programmingLanguages.json";
-import { Collection } from "./database.service";
+import { Collection } from "../constants/database";
 
 const { mongoUsername, mongoPassword, mongoDbName } = config;
 

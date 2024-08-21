@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { config } from "../config";
-import { JWT } from "../../../common/interfaces";
+import { JWT } from "../../../common/types";
 import { NextFunction, Response } from "express";
 import { HttpStatus } from "../constants/httpStatus";
 
@@ -16,7 +16,7 @@ export function getRefreshToken(payload: JWT.Payload) {
   });
 }
 
-export function refreshTokenValid(token: string) {
+function refreshTokenValid(token: string) {
   try {
     const { exp: expirationTime } = jwt.verify(
       token,
