@@ -1,13 +1,13 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { NextFunction, Request, Response } from "express";
-import AuthenticationHelper from "../helpers/authenticationHelper";
+import AuthenticationService from "../helpers/authentication.service";
 
 @Injectable()
 export class AuthenticateMiddleware implements NestMiddleware {
-  constructor(private readonly authenticationHelper: AuthenticationHelper) {}
+  constructor(private readonly authenticationService: AuthenticationService) {}
 
   use(req: Request, res: Response, next: NextFunction) {
-    // this.authenticationHelper.authenticate(req, res, next);
+    // this.authenticationService.authenticate(req, res, next);
     next();
   }
 }

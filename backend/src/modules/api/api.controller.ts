@@ -2,11 +2,11 @@ import { Controller, Get, Post, Req, Res } from "@nestjs/common";
 import { Request, Response } from "express";
 import { HttpStatus } from "../../constants/httpStatus";
 import type { SignInRequest, SignUpRequest } from "../../types";
-import AuthenticationHelper from "../../helpers/authenticationHelper";
+import AuthenticationService from "../../helpers/authentication.service";
 
 @Controller()
 export class ApiController {
-  constructor(private readonly authenticationHelper: AuthenticationHelper) {}
+  constructor(private readonly authenticationService: AuthenticationService) {}
 
   @Get("register")
   register(@Req() req: SignUpRequest, @Res() res: Response) {
@@ -18,7 +18,7 @@ export class ApiController {
       });
       return;
     } else {
-      this.authenticationHelper.signUp(req, res);
+      this.authenticationService.signUp(req, res);
     }
   }
 
@@ -31,17 +31,17 @@ export class ApiController {
         message: "The fields email and password are required",
       });
     } else {
-      this.authenticationHelper.signIn(req, res);
+      this.authenticationService.signIn(req, res);
     }
   }
 
   @Post("logout")
   logout(@Req() req: Request, @Res() res: Response) {
-    return this.authenticationHelper.logout(req, res);
+    return this.authenticationService.logout(req, res);
   }
 
   @Get("refresh-access-token")
   refreshAccessToken(@Req() req: Request, @Res() res: Response) {
-    return this.authenticationHelper.refreshAccessToken(req, res);
+    return this.authenticationService.refreshAccessToken(req, res);
   }
 }

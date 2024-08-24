@@ -16,7 +16,7 @@ import AuthenticationRepository from "./authentication.repository";
 const SALT_ROUNDS = 10;
 
 @Injectable()
-class AuthenticationHelper {
+class AuthenticationService {
   constructor(
     private readonly authenticationRepository: AuthenticationRepository
   ) {}
@@ -136,4 +136,4 @@ class AuthenticationHelper {
   };
 }
 
-export default AuthenticationHelper;
+export default AuthenticationService;
