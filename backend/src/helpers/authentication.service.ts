@@ -96,7 +96,7 @@ class AuthenticationService {
       );
   }
 
-  logout(req: Request, res: Response) {
+  logout(res: Response) {
     res.clearCookie("refreshToken");
     res.status(HttpStatus.OK).send({ message: "Logged out successfully" });
   }

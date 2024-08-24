@@ -36,8 +36,8 @@ export class ApiController {
   }
 
   @Post("logout")
-  logout(@Req() req: Request, @Res() res: Response) {
-    return this.authenticationService.logout(req, res);
+  logout(@Res() res: Response) {
+    return this.authenticationService.logout(res);
   }
 
   @Get("refresh-access-token")
