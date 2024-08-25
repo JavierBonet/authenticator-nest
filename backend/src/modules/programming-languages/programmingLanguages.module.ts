@@ -1,12 +1,21 @@
 import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import ProgrammingLanguagesController from "./programmingLanguages.controller";
 import { AuthenticateMiddleware } from "../../middleware/authenticate.middleware";
-import { DatabaseModule } from "../../db/database.module";
 import { AuthenticationModule } from "../../helpers/authentication.module";
 import ProgrammingLanguagesRepository from "./programmingLanguages.repository";
+import { MongooseModule } from "@nestjs/mongoose";
+import {
+  ProgrammingLanguage,
+  ProgrammingLanguageSchema,
+} from "../../db/entities/programmingLanguage.entity";
 
 @Module({
-  imports: [AuthenticationModule, DatabaseModule],
+  imports: [
+    AuthenticationModule,
+    MongooseModule.forFeature([
+      { name: ProgrammingLanguage.name, schema: ProgrammingLanguageSchema },
+    ]),
+  ],
   providers: [ProgrammingLanguagesRepository],
   controllers: [ProgrammingLanguagesController],
 })

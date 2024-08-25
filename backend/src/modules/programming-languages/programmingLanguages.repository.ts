@@ -1,21 +1,20 @@
 import { Injectable } from "@nestjs/common";
-import DatabaseService from "../../db/database.service";
-import { config } from "../../config";
-import { Collection } from "../../constants/database";
-import { ProgrammingLanguage } from "../../../types";
-const { mongoDbName } = config;
+import {
+  ProgrammingLanguage,
+  ProgrammingLanguageDocument,
+} from "../../db/entities/programmingLanguage.entity";
+import { Model } from "mongoose";
+import { InjectModel } from "@nestjs/mongoose";
 
 @Injectable()
 class ProgrammingLanguagesRepository {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(
+    @InjectModel(ProgrammingLanguage.name)
+    private readonly programmingLanguageModel: Model<ProgrammingLanguage>
+  ) {}
 
-  async getAll(): Promise<ProgrammingLanguage[]> {
-    return this.databaseService
-      .getClient()
-      .db(mongoDbName)
-      .collection(Collection.ProgrammingLanguage)
-      .find<ProgrammingLanguage>({})
-      .toArray();
+  async getAll(): Promise<ProgrammingLanguageDocument[]> {
+    return this.programmingLanguageModel.find().exec();
   }
 }
 

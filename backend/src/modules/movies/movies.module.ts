@@ -2,11 +2,15 @@ import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
 import MoviesController from "./movies.controller";
 import { AuthenticateMiddleware } from "../../middleware/authenticate.middleware";
 import { AuthenticationModule } from "../../helpers/authentication.module";
-import { DatabaseModule } from "../../db/database.module";
 import MoviesRepository from "./movies.repository";
+import { MongooseModule } from "@nestjs/mongoose";
+import { Movie, MovieSchema } from "../../db/entities/movie.entity";
 
 @Module({
-  imports: [AuthenticationModule, DatabaseModule],
+  imports: [
+    AuthenticationModule,
+    MongooseModule.forFeature([{ name: Movie.name, schema: MovieSchema }]),
+  ],
   providers: [MoviesRepository],
   controllers: [MoviesController],
 })

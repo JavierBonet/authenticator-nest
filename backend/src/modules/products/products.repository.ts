@@ -1,21 +1,16 @@
 import { Injectable } from "@nestjs/common";
-import DatabaseService from "../../db/database.service";
-import { config } from "../../config";
-import { Collection } from "../../constants/database";
-import { Product } from "../../../types";
-const { mongoDbName } = config;
+import { Product, ProductDocument } from "../../db/entities/product.entity";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
 
 @Injectable()
 class ProductsRepository {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(
+    @InjectModel(Product.name) private readonly productModel: Model<Product>
+  ) {}
 
-  async getAll(): Promise<Product[]> {
-    return this.databaseService
-      .getClient()
-      .db(mongoDbName)
-      .collection(Collection.Product)
-      .find<Product>({})
-      .toArray();
+  async getAll(): Promise<ProductDocument[]> {
+    return this.productModel.find().exec();
   }
 }
 

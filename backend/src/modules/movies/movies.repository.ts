@@ -1,21 +1,16 @@
 import { Injectable } from "@nestjs/common";
-import DatabaseService from "../../db/database.service";
-import { config } from "../../config";
-import { Collection } from "../../constants/database";
-import { Movie } from "../../../../common/types";
-const { mongoDbName } = config;
+import { Movie, MovieDocument } from "../../db/entities/movie.entity";
+import { InjectModel } from "@nestjs/mongoose";
+import { Model } from "mongoose";
 
 @Injectable()
 class MoviesRepository {
-  constructor(private readonly databaseService: DatabaseService) {}
+  constructor(
+    @InjectModel(Movie.name) private readonly movieModel: Model<Movie>
+  ) {}
 
-  async getAll(): Promise<Movie[]> {
-    return this.databaseService
-      .getClient()
-      .db(mongoDbName)
-      .collection(Collection.Movie)
-      .find<Movie>({})
-      .toArray();
+  async getAll(): Promise<MovieDocument[]> {
+    return this.movieModel.find().exec();
   }
 }
 
