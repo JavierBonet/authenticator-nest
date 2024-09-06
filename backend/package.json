@@ -8,7 +8,7 @@
     "start:dev": "nest start --watch",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "populate-db": "ts-node ./src/db/populateDb.ts"
+    "populate-db": "nest start --config ./nest-cli.populateDb.json"
   },
   "repository": {
     "type": "git",

@@ -2,3 +2,7 @@ To do list:
 
   - Backend
     [√] Change authentication.helper.ts to authentication.service.ts
+    [√] Use a standalone approach to replace populateDb.ts logic
+    [!] Check if it's possible to use monorepo configuration to define a configuration for main app and another for populate DB
+      Even if it is possible to use monorepo feature for this, it doesn't make sense. It makes more sense to create another nest config
+      file and start the nest application like this `nest start --config ./src/db/populate-database/nest-cli.json`
