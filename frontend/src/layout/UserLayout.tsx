@@ -1,24 +1,23 @@
+'use client';
+
 import React, { useContext, useState } from 'react';
 import { Tooltip } from '@mui/material';
 import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
 import MovieIcon from '@mui/icons-material/Movie';
 import CodeIcon from '@mui/icons-material/Code';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import TokenContext from '../contexts/TokenContext';
 import AuthenticationApi from '../api/authenticationApi';
 import { toast } from 'react-toastify';
 import LogoutDialog from './UserLayout/Dialog';
 import styles from './NavBarLayout.module.scss';
-import {
-  Keys,
-  deleteLocalStorageKey,
-} from '../components/authentication/common/utils/localStorage';
 
 export default function UserLayout() {
   const [open, setOpen] = useState(false);
   const { setToken, tokenRef } = useContext(TokenContext);
-  const navigate = useNavigate();
+  const router = useRouter();
   const authenticationApi = new AuthenticationApi(
     setToken,
     () => tokenRef.current
@@ -28,7 +27,7 @@ export default function UserLayout() {
     authenticationApi.logout().then(({ message }) => {
       setToken('');
       setOpen(false);
-      navigate('/signin');
+      router.push('/signin');
       toast.success(message);
     });
   };
@@ -37,34 +36,34 @@ export default function UserLayout() {
     <>
       <div className={styles['navbar-links']}>
         <Tooltip title="Products">
-          <NavLink to="/user/products">
+          <Link href="/user/products">
             <div className={styles['navbar-link']}>
               Products
               <HomeRepairServiceIcon fontSize="large" />
             </div>
-          </NavLink>
+          </Link>
         </Tooltip>
         |
         <Tooltip title="Movies">
-          <NavLink to="/user/movies">
+          <Link href="/user/movies">
             <div className={styles['navbar-link']}>
               Movies
               <MovieIcon fontSize="large" />
             </div>
-          </NavLink>
+          </Link>
         </Tooltip>
         |
         <Tooltip title="Development">
-          <NavLink to="/user/programming-languages">
+          <Link href="/user/programming-languages">
             <div className={styles['navbar-link']}>
               Development
               <CodeIcon fontSize="large" />
             </div>
-          </NavLink>
+          </Link>
         </Tooltip>
         |
         <Tooltip title="Log out">
-          <Link to="#">
+          <Link href="#">
             <div
               className={styles['navbar-link']}
               onClick={() => setOpen(true)}

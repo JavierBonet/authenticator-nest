@@ -1,3 +1,5 @@
+'use client';
+
 import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import WelcomeLayout from './WelcomeLayout';
 import UserLayout from './UserLayout';

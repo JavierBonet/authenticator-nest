@@ -1,3 +1,5 @@
+'use client';
+
 import React, { ReactNode, createContext, useRef, useState } from 'react';
 import {
   Keys,
@@ -24,7 +26,6 @@ function TokenProvider({ children }: { children: ReactNode }) {
   const newSetToken = (newToken: string) => {
     setToken(newToken);
     tokenRef.current = newToken;
-    // SEGUIR CHEQUEANDO SI SE LLAMA A SET TOKEN CUANDO NO DEBERÍA (POR EJEMPLO AL PASAR DE MOVIES A PRODUCTS Y DEMAS)
     console.log('tokenRef.current', tokenRef.current);
     if (newToken === '') {
       deleteLocalStorageKey(Keys.SignedIn);
@@ -40,5 +41,5 @@ function TokenProvider({ children }: { children: ReactNode }) {
   );
 }
 
-export default TokenContext;
 export { TokenProvider };
+export default TokenContext;
