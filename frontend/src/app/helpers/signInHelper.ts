@@ -1,7 +1,4 @@
-import {
-  LoginError,
-  UserLogin,
-} from '../../../components/authentication/types';
+import { LoginError, UserLogin } from '../types/authentication';
 
 export const requiredFieldText = 'This field is required';
 

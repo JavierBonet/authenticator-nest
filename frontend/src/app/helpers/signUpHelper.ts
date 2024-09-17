@@ -1,4 +1,4 @@
-import { RegisterError, UserRegister } from '../authentication/types';
+import { RegisterError, UserRegister } from '../types/authentication';
 
 export const requiredFieldText = 'This field is required';
 

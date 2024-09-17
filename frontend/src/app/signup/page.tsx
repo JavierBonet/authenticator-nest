@@ -2,9 +2,9 @@
 
 import React, { CSSProperties, useContext, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import ProtectedTextField from './authentication/common/ProtectedTextField';
+import ProtectedTextField from '../authentication/common/ProtectedTextField';
 import AuthenticationApi from '../../api/authenticationApi';
-import { RegisterError, UserRegister } from './authentication/types';
+import { RegisterError, UserRegister } from '../types/authentication';
 import { toast } from 'react-toastify';
 import TokenProvider from '../../contexts/TokenContext';
 import FormControl from '@mui/material/FormControl';
@@ -19,7 +19,7 @@ import {
   getNewErrors,
   validateField,
   validatePassword,
-} from './SignUp/validationHelper';
+} from '../helpers/signUpHelper';
 
 export const initialUser: UserRegister = {
   fullName: '',

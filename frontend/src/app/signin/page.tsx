@@ -15,7 +15,7 @@ import {
   errorsExist,
   getNewErrors,
   validateField,
-} from './SignIn/validationHelper';
+} from '../helpers/signInHelper';
 
 const initialUser: UserLogin = {
   email: '',
