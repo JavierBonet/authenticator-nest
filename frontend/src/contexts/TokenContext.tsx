@@ -5,7 +5,7 @@ import {
   Keys,
   deleteLocalStorageKey,
   setLocalStorageKey,
-} from '../components/authentication/common/utils/localStorage';
+} from '../utils/localStorage';
 
 interface TokenContextProps {
   token: string;

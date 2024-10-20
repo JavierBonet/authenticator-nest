@@ -3,9 +3,9 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import '../styles.scss';
+import './styles.scss';
 import ToastProvider from '../providers/toastProvider';
-import NavBarLayout from '../layout/NavBarLayout';
+import NavBarLayout from './layout/NavBarLayout';
 import { TokenProvider } from '../contexts/TokenContext';
 
 export const metadata: Metadata = {
