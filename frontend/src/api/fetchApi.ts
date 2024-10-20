@@ -1,8 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import {
-  Keys,
-  deleteLocalStorageKey,
-} from '../components/authentication/common/utils/localStorage';
+import { Keys, deleteLocalStorageKey } from '../utils/localStorage';
 
 class FetchApi {
   private static instance: FetchApi;

@@ -1,5 +1,5 @@
-import { UserLogin, UserRegister } from '../components/authentication/types';
-import { config } from '../config';
+import { UserLogin, UserRegister } from '../app/authentication/types';
+import { config } from '../utils/config';
 import axios from 'axios';
 import FetchApì from './fetchApi';
 

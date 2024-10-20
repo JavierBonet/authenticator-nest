@@ -1,11 +1,7 @@
-import { config } from '../config';
+import { config } from '../utils/config';
 import axios from 'axios';
 import FetchApì from './fetchApi';
-import {
-  Movie,
-  Product,
-  ProgrammingLanguage,
-} from '../../../common/interfaces';
+import { Movie, Product, ProgrammingLanguage } from '../../../common/types';
 
 const baseUrl = `${config.backendUrl}/api/v1`;
 
