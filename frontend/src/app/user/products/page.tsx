@@ -1,8 +1,9 @@
+'use client';
 import { useState, useContext, useEffect } from 'react';
-import { Product } from '../../../../common/interfaces';
-import EntitiesApi from '../../api/entitiesApi';
-import TokenContext from '../../contexts/TokenContext';
-import ProductsTable from './Products/ProductsTable';
+import { Product } from '../../../../../common/types';
+import EntitiesApi from '../../../api/entitiesApi';
+import TokenContext from '../../../contexts/TokenContext';
+import ProductsTable from './ProductsTable';
 import { CircularProgress } from '@mui/material';
 import styles from './Products.module.scss';
 import { toast } from 'react-toastify';
