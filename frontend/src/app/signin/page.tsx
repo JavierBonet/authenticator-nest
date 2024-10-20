@@ -3,9 +3,15 @@
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
-import React, { CSSProperties, useContext, useEffect, useState } from 'react';
-import { LoginError, UserLogin } from '../../components/authentication/types';
-import ProtectedTextField from '../../components/authentication/common/ProtectedTextField';
+import React, {
+  CSSProperties,
+  Suspense,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
+import { LoginError, UserLogin } from '../authentication/types';
+import ProtectedTextField from '../authentication/common/ProtectedTextField';
 import AuthenticationApi from '../../api/authenticationApi';
 import { toast } from 'react-toastify';
 import TokenProvider from '../../contexts/TokenContext';
@@ -77,6 +83,8 @@ const SignIn = () => {
         router.push('/user');
       } else {
         toast.error(message);
+        const newErrors = getNewErrors(error, user);
+        setError(newErrors);
       }
     });
   };
@@ -118,4 +126,10 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+const SignInWrapper = () => (
+  <Suspense>
+    <SignIn />
+  </Suspense>
+);
+
+export default SignInWrapper;
