@@ -24,6 +24,7 @@
     ]
   },
   "include": [
+    "../common/types/*.ts",
     "src/**/*",
     ".next/types/**/*.ts"
   ],
