@@ -1,9 +1,10 @@
+'use client';
 import { useState, useContext, useEffect } from 'react';
-import { JWT, ProgrammingLanguage } from '../../../../common/interfaces';
-import EntitiesApi from '../../api/entitiesApi';
-import TokenContext from '../../contexts/TokenContext';
+import { JWT, ProgrammingLanguage } from '../../../../../common/types';
+import EntitiesApi from '../../../api/entitiesApi';
+import TokenContext from '../../../contexts/TokenContext';
 import { CircularProgress } from '@mui/material';
-import ProgrammingLanguagesTable from './ProgrammingLanguages/ProgrammingLanguagesTable';
+import ProgrammingLanguagesTable from './ProgrammingLanguagesTable';
 import styles from './ProgrammingLanguages.module.scss';
 import { toast } from 'react-toastify';
 

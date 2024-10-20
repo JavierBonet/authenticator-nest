@@ -8,7 +8,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import { ProgrammingLanguage } from '../../../../../common/interfaces';
+import { ProgrammingLanguage } from '../../../../../common/types';
 
 const purpleColor = '#3f51b5';
 const categoryColor = '#f50057';
