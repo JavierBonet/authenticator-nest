@@ -1,3 +1,4 @@
+'use client';
 import {
   Table,
   TableBody,
@@ -8,7 +9,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import { Movie } from '../../../../../common/interfaces';
+import { Movie } from '../../../../../common/types';
 
 const purpleColor = '#3f51b5';
 const categoryColor = '#f50057';

@@ -1,9 +1,10 @@
+'use client';
 import { useState, useContext, useEffect } from 'react';
-import { Movie } from '../../../../common/interfaces';
-import EntitiesApi from '../../api/entitiesApi';
-import TokenContext from '../../contexts/TokenContext';
+import { Movie } from '../../../../../common/types';
+import EntitiesApi from '../../../api/entitiesApi';
+import TokenContext from '../../../contexts/TokenContext';
 import { CircularProgress } from '@mui/material';
-import MoviesTable from './Movies/MoviesTable';
+import MoviesTable from './MoviesTable';
 import styles from './Movies.module.scss';
 import { toast } from 'react-toastify';
 
