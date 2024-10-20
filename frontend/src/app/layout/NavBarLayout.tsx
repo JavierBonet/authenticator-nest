@@ -4,12 +4,9 @@ import React, { ReactNode, useContext, useEffect, useState } from 'react';
 import WelcomeLayout from './WelcomeLayout';
 import UserLayout from './UserLayout';
 import styles from './NavBarLayout.module.scss';
-import {
-  Keys,
-  getLocalStorageKey,
-} from '../components/authentication/common/utils/localStorage';
+import { Keys, getLocalStorageKey } from '../../utils/localStorage';
 import { CircularProgress } from '@mui/material';
-import TokenContext from '../contexts/TokenContext';
+import TokenContext from '../../contexts/TokenContext';
 
 interface Props {
   children: ReactNode;
