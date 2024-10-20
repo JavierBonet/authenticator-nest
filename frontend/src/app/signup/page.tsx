@@ -21,7 +21,7 @@ import {
   validatePassword,
 } from '../helpers/signUpHelper';
 
-export const initialUser: UserRegister = {
+const initialUser: UserRegister = {
   fullName: '',
   email: '',
   role: '',
@@ -78,7 +78,7 @@ const SignUp = () => {
   };
 
   const handleSubmit = async () => {
-    if (errorsExist(error)) {
+    if (errorsExist(error) && user != initialUser) {
       const newErrors = getNewErrors(error, user);
       setError(newErrors);
       toast.error('Fix errors before submitting');
@@ -91,6 +91,8 @@ const SignUp = () => {
         router.push('/signin');
       } else {
         toast.error(message);
+        const newErrors = getNewErrors(error, user);
+        setError(newErrors);
       }
     });
   };
