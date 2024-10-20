@@ -1,15 +1,20 @@
-import React, { useEffect, useContext } from 'react';
-import TokenContext from '../../../contexts/TokenContext';
-import { Outlet } from 'react-router-dom';
-import AuthenticationApi from '../../../api/authenticationApi';
+'use client';
+import React, { useEffect, useContext, useState } from 'react';
+import TokenContext from '../../contexts/TokenContext';
 import {
   Keys,
   deleteLocalStorageKey,
   getLocalStorageKey,
   setLocalStorageKey,
-} from './utils/localStorage';
+} from '../../app/authentication/common/utils/localStorage';
+import AuthenticationApi from '../../api/authenticationApi';
 
-export default function ProtectedRoute() {
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function ProtectedLayout({ children }: Props) {
+  const [signedUp, setSignedUp] = useState<boolean | undefined>(undefined);
   const { token, setToken, tokenRef } = useContext(TokenContext);
 
   const authenticationApi = new AuthenticationApi(
@@ -33,21 +38,13 @@ export default function ProtectedRoute() {
     }
   };
 
-  const signedUp = getLocalStorageKey(Keys.SignedIn);
-
   useEffect(() => {
+    setSignedUp(getLocalStorageKey(Keys.SignedIn) === 'true');
     const refreshToken = async () => {
-      const notRefreshing = getLocalStorageKey(Keys.RefreshingToken) !== 'true';
-      // if (signedUp === 'true') {
       await refresh();
-      // } else {
-      // if (!token && notRefreshing) {
-      //   await refresh();
-      // }
-      // }
     };
     refreshToken();
   }, []);
 
-  return signedUp === 'true' ? <Outlet /> : <></>;
+  return signedUp ? children : <></>;
 }
