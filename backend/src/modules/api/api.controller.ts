@@ -8,7 +8,7 @@ import AuthenticationService from "../../helpers/authentication.service";
 export class ApiController {
   constructor(private readonly authenticationService: AuthenticationService) {}
 
-  @Get("register")
+  @Post("register")
   register(@Req() req: SignUpRequest, @Res() res: Response) {
     const { fullName, email, role, password } = req.body;
 
