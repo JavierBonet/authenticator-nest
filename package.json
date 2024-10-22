@@ -11,6 +11,9 @@
     "install-backend": "echo \"Installing backend dependencies...\"; cd backend; yarn",
     "install-frontend": "echo \"Installing frontend dependencies...\"; cd frontend; yarn",
     "install-all": "yarn install-root; yarn install-backend; yarn install-frontend",
+    "build-backend": "cd backend; yarn build",
+    "build-frontend": "cd frontend; yarn build",
+    "build": "npm-run-all --parallel build-backend build-frontend",
     "start-backend": "cd backend; yarn start",
     "start-frontend": "cd frontend; yarn dev",
     "start": "npm-run-all --parallel start-backend start-frontend"
