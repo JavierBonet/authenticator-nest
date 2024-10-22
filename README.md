@@ -1,5 +1,5 @@
 # Introduction
-NodeJS authentication and authorization logic with a simple React frontend
+Replica of [authenticator app](https://github.com/JavierBonet/authenticator) using [NestJS](https://nestjs.com/) framework in the backend and [NextJS](https://nextjs.org/) framework in the frontend
 
 ## :ledger: Index
 
@@ -11,21 +11,19 @@ NodeJS authentication and authorization logic with a simple React frontend
 
 
 ##  :beginner: About
-This repository contains a **NodeJS** <span><img src="nodejs_logo.png" alt="drawing" width="15"/></span> backend and a simple **ReactJS** <span><img src="react_logo.png" alt="drawing" width="15"/></span> frontend that implements authentication and authorization logic.
+This repository contains a **NodeJS** <span><img src="nodejs_logo.png" alt="drawing" width="15"/></span> backend using NestJS framework and a simple **ReactJS** <span><img src="react_logo.png" alt="drawing" width="15"/></span> frontend that makes use of NextJS framework. The whole application implements authentication and authorization logic.
 
 ## :zap: Usage
 
 ###  :electric_plug: Installation
-- Run `yarn install-all` in the root folder to install dependencies
+- Run `yarn install-all` in the root folder to install the dependencies for
+  - Root
+  - Backend
+  - Frontend
 
-```
-$ yarn
-$ cd backend; yarn
-$ cd frontend; yarn
-```
-
-- Use the ***.sample.env*** files inside backend and frontend folders to create a ***.env*** in each of them and set the corresponding values where needed
+- Use the ***.env.sample*** files inside backend and frontend folders to create a ***.env*** in each of them and set the corresponding values where needed
 
 ###  :package: Commands
-- To start the application, run `yarn start` in the root folder
+- **Start**: to start the application, run `yarn start` in the root folder
+- **Build**: to build the application, run `yarn build` in the root folder
 
